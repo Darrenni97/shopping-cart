@@ -4,6 +4,18 @@ import "./App.css";
 import ItemPage from "./ItemPage";
 import { items } from "./static-data";
 
+const summarizeCart = cart => {
+  const groupedItems = cart.reduce((summary, item) => {
+    sumnmary[item.id] = summary[item.id] || {
+      ...item,
+      count: 0
+    };
+    summart[item.id].count++;
+    return summary;
+  }, {});
+  return Object.values(groupedItems);
+};
+
 const App = () => {
   const [activeTab, setActiveTab] = useState("items");
   const [cart, setCart] = useState([]);
