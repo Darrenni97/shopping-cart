@@ -35,13 +35,13 @@ const App = () => {
   );
 };
 
-const Content = ({ tab, onAddToCart, cart }) => {
+const Content = ({ tab, onAddToCart, cart, onRemoveItem }) => {
   switch (tab) {
     default:
     case "items":
       return <ItemPage items={items} onAddToCart={onAddToCart} />;
     case "cart":
-      return <CartPage items={cart} />;
+      return <CartPage items={cart} onAddOne={onAddToCart} onRemoveOne={onRemoveItem} />;
   }
 };
 
