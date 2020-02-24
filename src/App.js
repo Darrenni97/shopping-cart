@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Nav from "./Nav";
-import "./App.css";
 import ItemPage from "./ItemPage";
-import { items } from "./static-data";
 import CartPage from "./CartPage";
+import { items } from "./static-data";
+import "./App.css";
 
 const summarizeCart = cart => {
   const groupedItems = cart.reduce((summary, item) => {
@@ -25,11 +25,27 @@ const App = () => {
     setCart(prevCart => [...prevCart, item]);
   };
 
+  const removeItem = item => {
+    let index = cart.findIndex(i => i.id === item.id);
+    if (index >= 0) {
+      setCart(cart => {
+        const copy = [...cart];
+        copy.splice(index, 1);
+        return copy;
+      });
+    }
+  };
+
   return (
     <div className="App">
       <Nav activeTab={activeTab} onTabChange={setActiveTab} />
       <main className="App-content">
-        <Content tab={activeTab} onAddToCart={addToCart} cart={summarizeCart(cart)} />
+        <Content
+          tab={activeTab}
+          onAddToCart={addToCart}
+          cart={summarizeCart(cart)}
+          onRemoveItem={removeItem}
+        />
       </main>
     </div>
   );
